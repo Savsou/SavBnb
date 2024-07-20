@@ -13,8 +13,6 @@ module.exports = {
     await User.bulkCreate([
       {
         email: 'demo@user.io',
-        firstName: 'Demo',
-        lastName: 'Lition',
         username: 'Demo-lition',
         firstName: 'Demo',
         lastName: 'Lition',
@@ -22,8 +20,6 @@ module.exports = {
       },
       {
         email: 'user1@user.io',
-        firstName: 'Fake1',
-        lastName: 'User1',
         username: 'FakeUser1',
         firstName: 'Faker1',
         lastName: 'User1',
@@ -31,8 +27,6 @@ module.exports = {
       },
       {
         email: 'user2@user.io',
-        firstName: 'Fake2',
-        lastName: 'User2',
         username: 'FakeUser2',
         firstName: 'Faker2',
         lastName: 'User2',
