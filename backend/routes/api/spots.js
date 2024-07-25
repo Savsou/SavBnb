@@ -41,7 +41,8 @@ router.get('/:spotId', async (req, res) => {
         include: [
             {
                 model: Image,
-                attributes: ['id', 'url', 'preview']
+                attributes: ['id', 'url', 'preview'],
+                where: {imageableType: 'Spot'}
             },
             {
                 model: User,

@@ -17,6 +17,12 @@ module.exports = {
         preview: true,
       },
       {
+        imageableId: 1,
+        imageableType: 'Spot',
+        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjTxmOjhiweMJQ4muDyyn-CLhk1Ec_HMIBvQ&usqp=CAU',
+        preview: false,
+      },
+      {
         imageableId: 2,
         imageableType: 'Spot',
         url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Dubai_Marina_Skyline.jpg/1200px-Dubai_Marina_Skyline.jpg',
