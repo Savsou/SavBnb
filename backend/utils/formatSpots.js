@@ -27,7 +27,7 @@ const formatSpots = (spots) => {
             price: spotJson.price,
             createdAt: spotJson.createdAt,
             updatedAt: spotJson.updatedAt,
-            avgRating,
+            avgRating: avgRating.toFixed(1),
             previewImage
         }
     });
