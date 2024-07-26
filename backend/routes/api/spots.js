@@ -130,5 +130,62 @@ router.get('/:spotId', async (req, res) => {
     return res.json(formattedSpot);
 })
 
+router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
+    const { spotId } = req.params;
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    const userId = req.user.id;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        return res.status(404).json({message: "Spot couldn't be found"})
+    };
+
+    if (spot.ownerId !== userId) {
+        return res.status(404).json({message: "Spot is not owned by user"})
+    };
+
+    spot.address = address;
+    spot.city = city;
+    spot.state = state;
+    spot.country = country;
+    spot.lat = lat;
+    spot.lng = lng;
+    spot.name = name;
+    spot.description = description;
+    spot.price = price;
+
+    return res.json(spot);
+})
+
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    const { spotId } = req.params;
+    const { url, preview } = req.body;
+    const userId = req.user.id;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        return res.status(404).json({message: "Spot couldn't be found"})
+    };
+
+    if (spot.ownerId !== userId) {
+        return res.status(404).json({message: "Spot is not owned by user"})
+    };
+
+    const newImage = await Image.create({
+        imageableId: spotId,
+        imageableType: 'Spot',
+        url,
+        preview
+    });
+
+    return res.json({
+        id: newImage.id,
+        url: newImage.url,
+        preview: newImage.preview
+    });
+})
+
 
 module.exports = router;
