@@ -142,7 +142,7 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     };
 
     if (spot.ownerId !== userId) {
-        return res.status(404).json({message: "Spot is not owned by user"})
+        return res.status(403).json({message: "Spot is not owned by user"})
     };
 
     spot.address = address;
@@ -158,6 +158,31 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     return res.json(spot);
 })
 
+router.delete('/:spotId', requireAuth, async (req, res) => {
+    const { spotId } = req.params;
+    const userId = req.user.id;
+
+    const spot = await Spot.findByPk(spotId)
+
+    if (!spot) {
+        return res.status(404).json({message: "Spot couldn't be found"})
+    };
+
+    if (spot.ownerId !== userId) {
+        return res.status(403).json({message: "Spot is not owned by user"})
+    };
+
+    await Spot.destroy({
+        where: {
+            id: spotId,
+            ownerId: userId
+        }
+    });
+
+    return res.json({message: "Successfully deleted"})
+})
+
+
 router.post('/:spotId/images', requireAuth, async (req, res) => {
     const { spotId } = req.params;
     const { url, preview } = req.body;
@@ -170,7 +195,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     };
 
     if (spot.ownerId !== userId) {
-        return res.status(404).json({message: "Spot is not owned by user"})
+        return res.status(403).json({message: "Spot is not owned by user"})
     };
 
     const newImage = await Image.create({
