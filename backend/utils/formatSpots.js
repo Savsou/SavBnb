@@ -5,13 +5,7 @@ const formatSpots = (spots) => {
         const reviews = spotJson.Reviews;
         const avgRating = reviews.length > 0 ? reviews.reduce((sum, review) => sum + review.stars, 0) / reviews.length : null;
 
-        let previewImage = null;
-        for (const image of spotJson.Images) {
-            if (image.preview) {
-                previewImage = image.url;
-                break;
-            }
-        }
+        const previewImage = spotJson.previewImage && spotJson.previewImage.length > 0 ? spotJson.previewImage[0].url : null;
 
         return {
             id: spotJson.id,

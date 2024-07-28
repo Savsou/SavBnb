@@ -53,7 +53,16 @@ router.get('/', async (req, res) => {
     const spots =  await Spot.findAll({
         include: [
             { model: Review },
-            { model: Image }
+            {
+                model: Image,
+                as: 'previewImage',
+                attributes: ['url'],
+                where: {
+                    imageableType: 'Spot',
+                    preview: true
+                },
+                required: false
+            }
         ]
     });
 
@@ -81,7 +90,16 @@ router.get('/current', requireAuth, async (req, res) => {
         },
         include: [
             { model: Review },
-            { model: Image }
+            {
+                model: Image,
+                as: 'previewImage',
+                attributes: ['url'],
+                where: {
+                    imageableType: 'Spot',
+                    preview: true
+                },
+                required: false
+            }
         ]
     });
 
@@ -193,6 +211,7 @@ router.get('/:spotId', async (req, res) => {
             {
                 model: Image,
                 attributes: ['id', 'url', 'preview'],
+                as: 'previewImage',
                 where: {imageableType: 'Spot'}
             },
             {
@@ -230,7 +249,7 @@ router.get('/:spotId', async (req, res) => {
         updatedAt: spot.updatedAt,
         numReviews,
         avgStarRating: avgStarRating.toFixed(1),
-        SpotImages: spot.Images,
+        SpotImages: spot.previewImage,
         Owner: spot.User
     };
 
