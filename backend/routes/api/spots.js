@@ -39,6 +39,16 @@ const validateSpot = [
     handleValidationErrors
 ]
 
+const validateReview = [
+    check('review')
+        .notEmpty()
+        .withMessage('Review text is required'),
+    check('stars')
+        .isInt({min: 1, max: 5})
+        .withMessage('Stars must be an integer from 1 to 5'),
+    handleValidationErrors
+]
+
 router.get('/', async (req, res) => {
     const spots =  await Spot.findAll({
         include: [
@@ -113,6 +123,38 @@ router.get('/:spotId/reviews', async (req, res) => {
     const formattedReviews = formatReviews(reviews);
 
     return res.json({ Reviews: formattedReviews });
+})
+
+router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) => {
+    const { spotId } = req.params;
+    const { review, stars } = req.body;
+    const userId = req.user.id;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        return res.status(404).json({message: "Spot couldn't be found"})
+    }
+
+    const findReview = await Review.findAll({
+        where: {
+            userId,
+            spotId
+        }
+    });
+
+    if (findReview > 0) {
+        return res.status(500).json({message: "User already has a review for this spot"})
+    }
+
+    const newReview = await Review.create({
+        userId,
+        spotId,
+        review,
+        stars
+    });
+
+    return res.json(newReview);
 })
 
 router.post('/:spotId/images', requireAuth, async (req, res) => {
