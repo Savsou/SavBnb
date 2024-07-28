@@ -28,7 +28,8 @@ router.get('/current', requireAuth, async (req, res) => {
                         as: 'previewImage',
                         attributes: ['url'],
                         where: {
-                            imageableType: 'Spot'
+                            imageableType: 'Spot',
+                            preview: true
                         },
                         required: false
                     }

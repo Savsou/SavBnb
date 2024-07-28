@@ -4,6 +4,7 @@ const formatSpots = require('../../utils/formatSpots')
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth')
 const { handleValidationErrors } = require('../../utils/validation');
 const { check } = require('express-validator');
+const formatReviews = require('../../utils/formatReviews');
 
 const router = express.Router();
 
@@ -77,6 +78,70 @@ router.get('/current', requireAuth, async (req, res) => {
     const formattedSpots = formatSpots(spots);
 
     return res.json({ Spots: formattedSpots });
+})
+
+router.get('/:spotId/reviews', async (req, res) => {
+    const { spotId } = req.params;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        return res.status(404).json({message: "Spot couldn't be found"})
+    };
+
+    const reviews = await Review.findAll({
+        where: {
+            spotId
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName',]
+            },
+            {
+                model: Image,
+                as: 'ReviewImages',
+                attributes: ['id', 'url'],
+                where: {
+                    imageableType: 'Review'
+                },
+                required: false
+            }
+        ]
+    });
+
+    const formattedReviews = formatReviews(reviews);
+
+    return res.json({ Reviews: formattedReviews });
+})
+
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    const { spotId } = req.params;
+    const { url, preview } = req.body;
+    const userId = req.user.id;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        return res.status(404).json({message: "Spot couldn't be found"})
+    };
+
+    if (spot.ownerId !== userId) {
+        return res.status(403).json({message: "Spot is not owned by user"})
+    };
+
+    const newImage = await Image.create({
+        imageableId: spotId,
+        imageableType: 'Spot',
+        url,
+        preview
+    });
+
+    return res.json({
+        id: newImage.id,
+        url: newImage.url,
+        preview: newImage.preview
+    });
 })
 
 router.get('/:spotId', async (req, res) => {
@@ -180,36 +245,6 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     });
 
     return res.json({message: "Successfully deleted"})
-})
-
-
-router.post('/:spotId/images', requireAuth, async (req, res) => {
-    const { spotId } = req.params;
-    const { url, preview } = req.body;
-    const userId = req.user.id;
-
-    const spot = await Spot.findByPk(spotId);
-
-    if (!spot) {
-        return res.status(404).json({message: "Spot couldn't be found"})
-    };
-
-    if (spot.ownerId !== userId) {
-        return res.status(403).json({message: "Spot is not owned by user"})
-    };
-
-    const newImage = await Image.create({
-        imageableId: spotId,
-        imageableType: 'Spot',
-        url,
-        preview
-    });
-
-    return res.json({
-        id: newImage.id,
-        url: newImage.url,
-        preview: newImage.preview
-    });
 })
 
 
