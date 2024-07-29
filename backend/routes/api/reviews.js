@@ -7,6 +7,16 @@ const formatReviews = require('../../utils/formatReviews');
 
 const router = express.Router();
 
+const validateReview = [
+    check('review')
+        .notEmpty()
+        .withMessage("Review text is required"),
+    check('stars')
+        .isInt({min: 1, max: 5})
+        .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+]
+
 router.get('/current', requireAuth, async (req, res) => {
     const userId = req.user.id
 
@@ -89,6 +99,29 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
         url: newImage.url
     })
 
+})
+
+router.put('/:reviewId', requireAuth, validateReview, async (req, res) => {
+    const { reviewId } = req.params;
+    const { review, stars } = req.body;
+    const userId = req.user.id;
+
+    const editReview = await Review.findByPk(reviewId);
+
+    if (!editReview) {
+        return res.status(404).json({message: "Review couldn't be found"})
+    }
+
+    if (editReview.userId !== userId) {
+        return res.status(403).json({message: "Review does not belong to the User"})
+    };
+
+    editReview.review = review;
+    editReview.stars = stars;
+
+    await editReview.save();
+
+    return res.status(200).json(editReview);
 })
 
 module.exports = router;

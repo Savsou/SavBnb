@@ -281,6 +281,8 @@ router.put('/:spotId', requireAuth, validateSpot, async (req, res) => {
     spot.description = description;
     spot.price = price;
 
+    await spot.save();
+
     return res.json(spot);
 })
 
