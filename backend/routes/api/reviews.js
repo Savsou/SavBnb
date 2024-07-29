@@ -52,4 +52,43 @@ router.get('/current', requireAuth, async (req, res) => {
     return res.json({ Reviews: formattedReviews });
 })
 
+router.post('/:reviewId/images', requireAuth, async (req, res) => {
+    const { reviewId } = req.params;
+    const { url } = req.body;
+    const userId = req.user.id;
+
+    const review = await Review.findByPk(reviewId, {
+        include: [
+            {
+                model: Image,
+                as: 'ReviewImages'
+            }
+        ]
+    });
+
+    if (!review) {
+        return res.status(404).json({message: "Review couldn't be found"})
+    };
+
+    if (review.userId !== userId) {
+        return res.status(403).json({message: "Review does not belong to User"})
+    };
+
+    if (review.ReviewImages.length >= 10) {
+        return res.status(403).json({message: "Maximum number of images for this resource was reached"})
+    };
+
+    const newImage = await Image.create({
+        imageableId: reviewId,
+        imageableType: 'Review',
+        url
+    });
+
+    return res.status(201).json({
+        id: newImage.id,
+        url: newImage.url
+    })
+
+})
+
 module.exports = router;
