@@ -1,5 +1,5 @@
 const express = require('express');
-const { Spot, Review, Image, User } = require('../../db/models');
+const { Spot, Review, Image, User, Booking } = require('../../db/models');
 const formatSpots = require('../../utils/formatSpots')
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth')
 const { handleValidationErrors } = require('../../utils/validation');
@@ -106,6 +106,65 @@ router.get('/current', requireAuth, async (req, res) => {
     const formattedSpots = formatSpots(spots);
 
     return res.json({ Spots: formattedSpots });
+})
+
+router.get('/:spotId/bookings', requireAuth, async(req, res) => {
+    const userId = req.user.id;
+    const { firstName, lastName } = req.user;
+    const { spotId } = req.params;
+
+    const spot = await Spot.findByPk(spotId);
+
+    if (!spot) {
+        return res.status(404).json({message: "Spot couldn't be found"});
+    }
+
+    const isOwner = spot.ownerId === userId;
+
+    const bookings = await Booking.findAll({
+        where: {
+            spotId
+        },
+        include: {
+            model: Spot,
+            attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price'],
+            include: {
+                model: Image,
+                as: 'previewImage',
+                where: {preview: true},
+                attributes: ['url'],
+            }
+        }
+    });
+
+    const formattedBookings = bookings.map(booking => {
+        const bookingJson = booking.toJSON();
+
+        if (!isOwner) {
+            return {
+                spotId: bookingJson.spotId,
+                startDate: bookingJson.startDate,
+                endDate: bookingJson.endDate
+            }
+        } else {
+            return {
+                User: {
+                    id: userId,
+                    firstName,
+                    lastName
+                },
+                id: bookingJson.id,
+                spotId: bookingJson.spotId,
+                userId: bookingJson.userId,
+                startDate: bookingJson.startDate,
+                endDate: bookingJson.endDate,
+                createdAt: bookingJson.createdAt,
+                updatedAt: bookingJson.updatedAt
+            }
+        }
+    });
+
+    return res.json({ Bookings: formattedBookings })
 })
 
 router.get('/:spotId/reviews', async (req, res) => {
