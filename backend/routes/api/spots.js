@@ -3,7 +3,7 @@ const { Spot, Review, Image, User, Booking } = require('../../db/models');
 const formatSpots = require('../../utils/formatSpots')
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth')
 const { handleValidationErrors } = require('../../utils/validation');
-const { check } = require('express-validator');
+const { check, query } = require('express-validator');
 const formatReviews = require('../../utils/formatReviews');
 const { Op } = require('sequelize');
 
@@ -72,8 +72,56 @@ const validateBooking = [
     handleValidationErrors
 ]
 
-router.get('/', async (req, res) => {
+const validateQueries = [
+    query('page')
+        .optional()
+        .isInt({min: 1, max: 10})
+        .withMessage("Page must be greater than or equal to 1"),
+    query('size')
+        .optional()
+        .isInt({min: 1, max: 20})
+        .withMessage("Size must be greater than or equal to 1"),
+    query('minLat')
+        .optional()
+        .isFloat()
+        .withMessage("Minimum latitude is invalid"),
+    query('maxLat')
+        .optional()
+        .isFloat()
+        .withMessage("Maximum latitude is invalid"),
+    query('minLng')
+        .optional()
+        .isFloat()
+        .withMessage("Minimum longitude is invalid"),
+    query('maxLng')
+        .optional()
+        .isFloat()
+        .withMessage("Maximum longitude is invalid"),
+    query('minPrice')
+        .optional()
+        .isFloat({min: 0})
+        .withMessage("Minimum price must be greater than or equal to 0"),
+    query('maxPrice')
+        .optional()
+        .isFloat({min: 0})
+        .withMessage("Maximum price must be greater than or equal to 0"),
+    handleValidationErrors
+]
+
+router.get('/', validateQueries, async (req, res) => {
+    const { page = 1, size = 20, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+
+    const where = {};
+
+    if (minLat !== undefined) where.lat = { [Op.gte]: minLat };
+    if (maxLat !== undefined) where.lat = { ...where.lat, [Op.lte]: maxLat };
+    if (minLng !== undefined) where.lng = { [Op.gte]: minLng };
+    if (maxLng !== undefined) where.lng = { ...where.lng, [Op.lte]: maxLng };
+    if (minPrice !== undefined) where.price = { [Op.gte]: minPrice };
+    if (maxPrice !== undefined) where.price = { ...where.price, [Op.lte]: maxPrice };
+
     const spots =  await Spot.findAll({
+        where,
         include: [
             { model: Review },
             {
@@ -86,12 +134,14 @@ router.get('/', async (req, res) => {
                 },
                 required: false
             }
-        ]
+        ],
+        limit: parseInt(size),
+        offset: parseInt(size * (page - 1))
     });
 
     const formattedSpots = formatSpots(spots);
 
-    return res.status(200).json({ Spots: formattedSpots });
+    return res.status(200).json({ Spots: formattedSpots, page, size });
 });
 
 router.post('/', requireAuth, validateSpot, async (req, res) => {
