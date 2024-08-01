@@ -30,6 +30,11 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Image.init({
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     imageableId: DataTypes.INTEGER,
     imageableType: DataTypes.STRING,
     url: DataTypes.STRING,
