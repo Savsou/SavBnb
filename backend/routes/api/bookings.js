@@ -44,6 +44,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 as: 'previewImage',
                 where: {preview: true},
                 attributes: ['url'],
+                required: false
             }
         }
     });
