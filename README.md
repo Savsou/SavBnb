@@ -2,7 +2,7 @@
 
 ## Database Schema Design
 
-[db-schema]: ./images/Savbnb.png
+[db-schema]: ./images/SavBnb.png
 
 ## API Documentation
 
