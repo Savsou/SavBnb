@@ -85,7 +85,8 @@ router.put('/:bookingId', requireAuth, validateBooking, async (req, res) => {
 
     const conflictBooking = await Booking.findOne({
         where: {
-            id: booking.spotId,
+            spotId: booking.spotId,
+            id: { [Op.ne]: bookingId},
             [Op.or]: [
                 { startDate: { [Op.between]: [startDate, endDate] } },
                 { endDate: { [Op.between]: [startDate, endDate] } },

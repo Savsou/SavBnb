@@ -152,7 +152,7 @@ router.post('/', requireAuth, validateSpot, async (req, res) => {
         ...req.body
     })
 
-    return res.json(newSpot);
+    return res.status(201).json(newSpot);
 })
 
 router.get('/current', requireAuth, async (req, res) => {
@@ -364,7 +364,7 @@ router.post('/:spotId/reviews', requireAuth, validateReview, async (req, res) =>
         stars
     });
 
-    return res.json(newReview);
+    return res.status(201).json(newReview);
 })
 
 router.post('/:spotId/images', requireAuth, async (req, res) => {
@@ -389,7 +389,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         preview
     });
 
-    return res.json({
+    return res.status(201).json({
         id: newImage.id,
         url: newImage.url,
         preview: newImage.preview
