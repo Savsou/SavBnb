@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
+import OpenModalButton from '../OpenModalButton';
+import LoginFormModal from "../LoginFormModal";
 import './Navigation.css';
 
 const Navigation = ({ loading }) => {
@@ -13,7 +15,10 @@ const Navigation = ({ loading }) => {
     ) : (
         <>
             <li>
-                <NavLink to="/login">Log In</NavLink>
+                <OpenModalButton
+                    buttonText="Log In"
+                    modalComponent={<LoginFormModal />}
+                />
             </li>
             <li>
                 <NavLink to="/signup">Sign Up</NavLink>
