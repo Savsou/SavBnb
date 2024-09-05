@@ -24,8 +24,8 @@ export const login = ({ credential, password }) => async dispatch => {
 
     if (res.ok) {
         res = await res.json();
-        dispatch(setUser(res));
-        return res;
+        dispatch(setUser(res.user));
+        return res.user;
     }
 };
 
@@ -53,8 +53,8 @@ export const signup = (user) => async dispatch => {
 
     if (res.ok) {
         res = await res.json();
-        dispatch(setUser(res));
-        return res;
+        dispatch(setUser(res.user));
+        return res.user;
     }
 }
 

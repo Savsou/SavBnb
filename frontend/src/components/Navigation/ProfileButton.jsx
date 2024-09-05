@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { DiAndroid } from "react-icons/di";
+import { CgProfile } from "react-icons/cg";
 import * as sessionActions from '../../store/session';
 
 const ProfileButton = ({ user }) => {
@@ -37,14 +37,13 @@ const ProfileButton = ({ user }) => {
     return (
         <>
             <button
-            style={{ color: "green", fontSize: "100px" }}
+            style={{ color: "black", fontSize: "30px" }}
             onClick={toggleMenu}
             >
-                <DiAndroid />
+                <CgProfile />
             </button>
             <ul className={ulClassName} ref={ulRef}>
-                <li>{user.username}</li>
-                <li>{user.firstName} {user.lastName}</li>
+                <li>Hello, {user.firstName}</li>
                 <li>{user.email}</li>
                 <li>
                     <button onClick={logout}>Log Out</button>

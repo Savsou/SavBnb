@@ -1,0 +1,39 @@
+.signup-form-modal {
+    text-align: center;
+}
+
+.signup-form-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.signup-form-modal input {
+    background-color: #E8F0FE;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.signup-form-modal button {
+    background-color: #FF5A5F;
+    color: white;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.signup-form-modal .error {
+    color: red;
+}
+
+.signup-form-modal button:disabled {
+    background-color: white;
+    color: #CCCCCC;
+    border: 1px solid #CCCCCC;
+    cursor: default;
+}

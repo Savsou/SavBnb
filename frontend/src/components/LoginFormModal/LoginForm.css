@@ -1,0 +1,51 @@
+.login-form-modal {
+    text-align: center;
+}
+
+.login-form-modal form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-form-modal input {
+    background-color: #E8F0FE;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.demo-button {
+    background-color: #00525E; /* Dark teal background for demo button */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    padding: 10px; /* Padding inside button */
+    margin-top: 10px; /* Space above demo button */
+    width: 100%; /* Full width */
+    cursor: pointer; /* Pointer cursor */
+    border-radius: 3px; /* Rounded corners */
+}
+
+
+.login-button {
+    background-color: #FF5A5F;
+    color: white;
+    border: 1px solid #000000;
+    border-radius: 3px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.login-form-modal .error {
+    color: red;
+}
+
+.login-form-modal button:disabled {
+    background-color: white;
+    color: #CCCCCC;
+    border: 1px solid #CCCCCC;
+    cursor: default;
+}

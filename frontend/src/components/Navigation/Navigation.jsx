@@ -4,13 +4,14 @@ import ProfileButton from "./ProfileButton";
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal/SignupFormModal";
+import { FaAirbnb } from "react-icons/fa";
 import './Navigation.css';
 
 const Navigation = ({ loading }) => {
     const sessionUser = useSelector((state) => state.session.user);
 
     const sessionLinks = sessionUser ? (
-        <li>
+        <li className="profile-button">
             <ProfileButton user={sessionUser}/>
         </li>
     ) : (
@@ -31,14 +32,18 @@ const Navigation = ({ loading }) => {
     );
 
     return (
-        <>
-            <ul>
-                <li>
-                <NavLink to='/'>Home</NavLink>
+        <nav className="navigation">
+            <ul className="nav-content">
+                <li className="logo">
+                    <NavLink to='/' className="nav-logo">
+                        <FaAirbnb /> SavBnb
+                    </NavLink>
                 </li>
-                {loading && sessionLinks}
+                <div className="nav-links">
+                    {loading && sessionLinks}
+                </div>
             </ul>
-        </>
+        </nav>
     )
 }
 
