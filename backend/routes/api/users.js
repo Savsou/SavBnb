@@ -1,9 +1,9 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const { check } = require('express-validator');
+const { check, validationResult } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
-const { setTokenCookie, requireAuth } = require('../../utils/auth');
+const { setTokenCookie } = require('../../utils/auth');
 const { User } = require('../../db/models');
 
 const router = express.Router();
@@ -12,7 +12,13 @@ const validateSignup = [
     check('email')
       .exists({ checkFalsy: true })
       .isEmail()
-      .withMessage('Please provide a valid email.'),
+      .withMessage('Please provide a valid email.')
+      .custom(async (email) => {
+        const existingUserByEmail = await User.findOne({ where: { email } });
+        if (existingUserByEmail) {
+            throw new Error('The provided email is already in use.');
+        }
+      }),
     check('username')
       .exists({ checkFalsy: true })
       .isLength({ min: 4 })
@@ -20,7 +26,13 @@ const validateSignup = [
     check('username')
       .not()
       .isEmail()
-      .withMessage('Username cannot be an email.'),
+      .withMessage('Username cannot be an email.')
+      .custom(async (username) => {
+        const existingUserByUsername = await User.findOne({ where: { username } });
+        if (existingUserByUsername) {
+            throw new Error('Username must be unique.');
+        }
+    }),
     check('password')
       .exists({ checkFalsy: true })
       .isLength({ min: 6 })
@@ -36,24 +48,6 @@ const validateSignup = [
 
 router.post('/', validateSignup, async (req, res) => {
   const { email, password, username, firstName, lastName } = req.body;
-
-  const existingUserByEmail = await User.findOne({ where: { email } });
-    if (existingUserByEmail) {
-        return res.status(400).json({
-            errors: {
-                email: 'The provided email is already in use.'
-            }
-        });
-    }
-
-    const existingUserByUsername = await User.findOne({ where: { username } });
-    if (existingUserByUsername) {
-        return res.status(400).json({
-            errors: {
-                username: 'Username must be unique.'
-            }
-        });
-    }
 
   const hashedPassword = bcrypt.hashSync(password);
   const user = await User.create({ email, username, hashedPassword, firstName, lastName });

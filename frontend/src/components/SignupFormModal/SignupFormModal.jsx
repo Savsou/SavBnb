@@ -35,6 +35,7 @@ const SignupFormModal = () => {
             .then(closeModal)
             .catch(async (res) => {
                 const data = await res.json();
+                console.log("Errors from backend", data.errors);
                 if (data?.errors) {
                     setErrors(data.errors)
                 }
@@ -53,7 +54,6 @@ const SignupFormModal = () => {
                 type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required
                 placeholder="Email"
                 />
                 {errors.email && <p className="error">{errors.email}</p>}
@@ -61,7 +61,6 @@ const SignupFormModal = () => {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                required
                 placeholder="Username"
                 />
                 {errors.username && <p className="error">{errors.username}</p>}
@@ -69,7 +68,6 @@ const SignupFormModal = () => {
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
-                required
                 placeholder="First Name"
                 />
                 {errors.firstName && <p className="error">{errors.firstName}</p>}
@@ -77,7 +75,6 @@ const SignupFormModal = () => {
                 type="text"
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
-                required
                 placeholder="Last Name"
                 />
                 {errors.lastName && <p className="error">{errors.lastName}</p>}
@@ -85,7 +82,6 @@ const SignupFormModal = () => {
                 type="text"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                required
                 placeholder="Password"
                 />
                 {errors.password && <p className="error">{errors.password}</p>}
@@ -93,7 +89,6 @@ const SignupFormModal = () => {
                 type="text"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                required
                 placeholder="Confirm Password"
                 />
                 {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}

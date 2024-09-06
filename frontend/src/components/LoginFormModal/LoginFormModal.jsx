@@ -59,14 +59,12 @@ const LoginFormModal = () => {
                     type="text"
                     value={credential}
                     onChange={(e) => setCredential(e.target.value)}
-                    required
                     placeholder="Username or Email"
                 />
                 <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    required
                     placeholder="Password"
                 />
                 {errors.credential && <p className="error">{errors.credential}</p>}
