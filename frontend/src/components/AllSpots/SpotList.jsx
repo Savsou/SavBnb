@@ -1,22 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSpots } from "../../store/spots";
 import SpotTile from "./SpotTile";
 import './SpotTile.css'
 
 const SpotList = () => {
-    const [spots, setSpots] = useState([]);
+    const dispatch = useDispatch();
+    const spots = useSelector((state) => state.spots.spots);
 
     useEffect(() => {
-        const fetchSpots = async () => {
-            const res = await fetch('/api/spots');
-
-            if (res.ok) {
-                const data = await res.json();
-                setSpots(data.Spots);
-            }
-        }
-
-        fetchSpots();
-    }, [])
+        dispatch(fetchSpots());
+    }, [dispatch])
 
     return (
         <div className="spot-list">
