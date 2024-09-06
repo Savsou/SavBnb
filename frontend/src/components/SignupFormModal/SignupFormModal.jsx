@@ -16,6 +16,8 @@ const SignupFormModal = () => {
     const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
+    const signButtonDisabled = username.length < 4 || password.length < 6;
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -95,7 +97,7 @@ const SignupFormModal = () => {
                 placeholder="Confirm Password"
                 />
                 {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
-                <button type="submit">Sign Up</button>
+                <button type="submit" disabled={signButtonDisabled}>Sign Up</button>
             </form>
         </div>
     )

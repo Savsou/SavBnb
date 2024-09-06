@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { CgProfile } from "react-icons/cg";
+import { RxHamburgerMenu } from "react-icons/rx";
 import * as sessionActions from '../../store/session';
+import { useNavigate } from "react-router-dom";
 
 const ProfileButton = ({ user }) => {
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
+    const navigate = useNavigate();
 
     const toggleMenu = (e) => {
         e.stopPropagation();
@@ -29,7 +32,8 @@ const ProfileButton = ({ user }) => {
 
     const logout = (e) => {
         e.preventDefault();
-        dispatch(sessionActions.logout());
+        dispatch(sessionActions.logout())
+            .then(() => navigate('/'));
     };
 
     const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -37,9 +41,19 @@ const ProfileButton = ({ user }) => {
     return (
         <>
             <button
-            style={{ color: "black", fontSize: "30px" }}
+            style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "10px",
+                padding: "5px 10px",
+                color: "black",
+                fontSize: "30px",
+                borderRadius: "20px"
+            }}
             onClick={toggleMenu}
             >
+                <RxHamburgerMenu />
                 <CgProfile />
             </button>
             <ul className={ulClassName} ref={ulRef}>
