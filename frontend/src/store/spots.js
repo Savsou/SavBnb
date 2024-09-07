@@ -32,7 +32,7 @@ export const fetchSpotById = (spotId) => async dispatch => {
 
     if (res.ok) {
         res = await res.json();
-        dispatch(setSingleSpot(res.spot));
+        dispatch(setSingleSpot(res));
         return res;
     }
 }

@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import SpotList from "./components/AllSpots";
+import SpotDetails from "./components/SpotDetails";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { restoreUser } from "./store/session";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <SpotList />
+      },
+      {
+        path:'/spots/:spotId',
+        element: <SpotDetails />
       },
     ]
   }
