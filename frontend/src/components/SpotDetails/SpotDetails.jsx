@@ -10,9 +10,7 @@ const SpotDetails = () => {
     const dispatch = useDispatch();
     const spot = useSelector((state) => state.spots.spot)
 
-    console.log("This is spot", spot);
-
-    let previewImage = spot.SpotImages.find((image) => image.preview).url || "https://rankenjordan.org/wp-content/themes/apexclinic/images/no-image/No-Image-Found-400x264.png";
+    // console.log("This is spot", spot);
 
     useEffect(() => {
         if (spotId) {
@@ -21,6 +19,8 @@ const SpotDetails = () => {
     }, [dispatch, spotId])
 
     if (!spot) return <p>Loading...</p>
+
+    let previewImage = spot.SpotImages?.find((image) => image.preview)?.url || "https://rankenjordan.org/wp-content/themes/apexclinic/images/no-image/No-Image-Found-400x264.png";
 
     return (
         <div className="spot-details-container">
@@ -31,19 +31,24 @@ const SpotDetails = () => {
                     <div className="preview-image">
                         <img src={previewImage} alt="" />
                     </div>
-                    <div className="other-images">
+                    <div className="smaller-images">
                         {spot.SpotImages.slice(1, 5).map((image, idx) => (
                             <img key={idx} src={image.url} alt={`Image ${idx}`} />
                         ))}
                     </div>
                 </div>
                 <div className="spot-details-info">
-                    <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
-                    <p>{spot.description}</p>
+                    <div className="info">
+                        <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+                        <p>{spot.description}</p>
+                    </div>
                     <div className="callout-box">
                         <div className="callout-box-info">
-                            <p>${spot.price} night</p>
-                            <p><LiaStarSolid />{spot.avgStarRating} - {spot.numReviews} reviews</p>
+                            <p className="price-info">
+                                <span className="price">${spot.price}</span>
+                                <span> night</span>
+                            </p>
+                            <p className="reviews"><LiaStarSolid />{spot.avgStarRating} - {spot.numReviews} reviews</p>
                         </div>
                         <button onClick={() => alert('Feature Coming Soon...')}>Reserve</button>
                     </div>

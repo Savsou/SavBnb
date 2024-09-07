@@ -37,7 +37,7 @@ export const fetchSpotById = (spotId) => async dispatch => {
     }
 }
 
-const initialState = { spots: [] }
+const initialState = { spots: [], spot: null }
 
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
