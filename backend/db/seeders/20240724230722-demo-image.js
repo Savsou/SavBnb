@@ -48,6 +48,24 @@ module.exports = {
         imageableId: 3,
         imageableType: 'Review',
         url: 'https://cdn.motor1.com/images/mgl/MkO9NN/s1/future-supercars.webp',
+      },
+      {
+        imageableId: 1,
+        imageableType: 'Spot',
+        url: 'https://www.marthastewart.com/thmb/lxfu2-95SWCS0jwciHs1mkbsGUM=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/modern-living-rooms-wb-1-bc45b0dc70e541f0ba40364ae6bd8421.jpg',
+        preview: false,
+      },
+      {
+        imageableId: 1,
+        imageableType: 'Spot',
+        url: 'https://www.feinmann.com/wp-content/uploads/What-is-a-wet-room-bathroom-02.jpg',
+        preview: false,
+      },
+      {
+        imageableId: 1,
+        imageableType: 'Spot',
+        url: 'https://www.decorilla.com/online-decorating/wp-content/uploads/2023/08/Master-bedroom-inspiration-for-a-luxurious-interior-design.jpg',
+        preview: false,
       }
     ], options);
   },
