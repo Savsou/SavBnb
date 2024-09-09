@@ -6,10 +6,13 @@ const SpotTile = ({ spot }) => {
     const {id, name, city, state, price, avgRating, previewImage } = spot;
     const rating = avgRating ? avgRating : 'New';
 
+    const defaultImg = "https://rankenjordan.org/wp-content/themes/apexclinic/images/no-image/No-Image-Found-400x264.png"
+    const imageSrc = previewImage ? previewImage : defaultImg;
+
     return (
         <Link to={`/spots/${id}`} className="spot-tile">
             <div className="spot-image">
-                <img src={previewImage} alt={name} />
+                <img src={imageSrc} alt={name} title={name} />
             </div>
             <div className="spot-info">
                 <p className="location">{city}, {state}</p>

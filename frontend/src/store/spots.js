@@ -30,14 +30,16 @@ export const fetchSpots = () => async dispatch => {
 export const fetchSpotById = (spotId) => async dispatch => {
     let res = await csrfFetch(`/api/spots/${spotId}`);
 
+    console.log("spots.js", res)
+
     if (res.ok) {
         res = await res.json();
-        dispatch(setSingleSpot(res.spot));
+        dispatch(setSingleSpot(res));
         return res;
     }
 }
 
-const initialState = { spots: [] }
+const initialState = { spots: [], spot: null }
 
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
