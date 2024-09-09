@@ -13,10 +13,6 @@
     text-decoration: none;
 }
 
-.spot-tile:visited {
-    color: black;
-}
-
 .spot-tile img {
     width: 100%;
     height: 300px;
