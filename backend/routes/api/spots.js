@@ -404,7 +404,8 @@ router.get('/:spotId', async (req, res) => {
                 model: Image,
                 attributes: ['id', 'url', 'preview'],
                 as: 'previewImage',
-                where: {imageableType: 'Spot'}
+                where: {imageableType: 'Spot'},
+                required: false
             },
             {
                 model: User,

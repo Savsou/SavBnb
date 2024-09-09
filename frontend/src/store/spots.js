@@ -30,6 +30,8 @@ export const fetchSpots = () => async dispatch => {
 export const fetchSpotById = (spotId) => async dispatch => {
     let res = await csrfFetch(`/api/spots/${spotId}`);
 
+    console.log("spots.js", res)
+
     if (res.ok) {
         res = await res.json();
         dispatch(setSingleSpot(res));
