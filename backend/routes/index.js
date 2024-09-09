@@ -9,17 +9,17 @@ if (process.env.NODE_ENV === 'production') {
 
   router.get('/', (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken());
-    return res.sendFile(
+    res.sendFile(
       path.resolve(__dirname, '../../frontend', 'dist', 'index.html')
     );
   });
 
-  router.use(express.static(path.resolve("../frontend/build")));
+  router.use(express.static(path.resolve("../frontend/dist")));
 
   router.get(/^(?!\/?api).*/, (req, res) => {
     res.cookie('XSRF-TOKEN', req.csrfToken());
-    return res.sendFile(
-      path.resolve(__dirname, '../../frontend', 'build', 'index.html')
+    res.sendFile(
+      path.resolve(__dirname, '../../frontend', 'dist', 'index.html')
     );
   });
 }

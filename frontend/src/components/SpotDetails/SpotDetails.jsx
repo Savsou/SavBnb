@@ -13,8 +13,11 @@ const SpotDetails = () => {
     const spot = useSelector((state) => state.spots.spot)
     const spotReviews = useSelector((state) => state.reviews.spotReviews)
 
-    console.log("This is spot", spot);
-    console.log("This is the reviews by spot", spotReviews)
+    // console.log("This is spot", spot);
+    // console.log("This is the reviews by spot", spotReviews)
+
+    const reverseReviews = [...spotReviews].reverse();
+    // console.log("this is the reverse reviews", reverseReviews)
 
     useEffect(() => {
         if (spotId) {
@@ -78,7 +81,7 @@ const SpotDetails = () => {
             </div>
             <div className="reviews-container">
                 <h2><LiaStarSolid /> {numReviews}</h2>
-                <ReviewList reviews={spotReviews}/>
+                <ReviewList reviews={reverseReviews}/>
             </div>
         </div>
     )
