@@ -1,9 +1,26 @@
-
 .spot-list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 20px;
+}
+
+@media (max-width: 1024px) {
+    .spot-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .spot-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .spot-list {
+        grid-template-columns: 1fr;
+    }
 }
 
 .spot-tile {
@@ -15,8 +32,9 @@
 
 .spot-tile img {
     width: 100%;
-    height: 300px;
+    height: auto;
     border-radius: 5px;
+    aspect-ratio: 3/2;
 }
 
 .spot-info {

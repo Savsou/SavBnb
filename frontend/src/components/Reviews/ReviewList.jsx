@@ -5,8 +5,8 @@ const ReviewList = ({ reviews }) => {
     const sessionUser = useSelector((state) => state.session.user)
     const spot = useSelector((state) => state.spots.spot)
 
-    console.log("Session User", sessionUser);
-    console.log("current spot", spot)
+    // console.log("Session User", sessionUser);
+    // console.log("current spot", spot)
 
     const postReview = sessionUser && sessionUser.id !== spot.Owner.id && reviews.length === 0;
 
