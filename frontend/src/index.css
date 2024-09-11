@@ -1,1 +1,8 @@
 /* TODO: Add sitewide styles */
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+input {
+    background-color: #E8F0FE;
+}
