@@ -1,5 +1,7 @@
-import { useSelector } from 'react-redux'
-import './ReviewList.css'
+import { useSelector } from 'react-redux';
+import OpenModalButton from '../OpenModalButton';
+import PostReviewModal from '../PostReviewModal';
+import './ReviewList.css';
 
 const ReviewList = ({ reviews }) => {
     const sessionUser = useSelector((state) => state.session.user)
@@ -25,7 +27,10 @@ const ReviewList = ({ reviews }) => {
     return (
         <div className="review-list">
             {postReview && (
-                <button className="post-review-button">Post Your Review</button>
+                <OpenModalButton
+                    buttonText="Post Your Review"
+                    modalComponent={<PostReviewModal />}
+                />
             )}
 
             {reviews.length === 0 ? (
