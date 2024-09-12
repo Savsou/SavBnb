@@ -40,7 +40,7 @@ const SpotDetails = () => {
     } else if (spot.numReviews === 1) {
         numReviews = <span>{spot.avgStarRating} - 1 review</span>
     } else {
-        numReviews = <span>{spot.numReviews} reviews</span>
+        numReviews = <span>{spot.avgStarRating} &bull; {spot.numReviews} reviews</span>
     }
 
     let previewImage = spot.SpotImages?.find((image) => image.preview)?.url || "https://rankenjordan.org/wp-content/themes/apexclinic/images/no-image/No-Image-Found-400x264.png";

@@ -12,7 +12,7 @@ const ManageSpots = () => {
     const navigate = useNavigate();
 
     const mySpots = useSelector((state) => state.spots.mySpots)
-    console.log("My Spots here", mySpots)
+    // console.log("My Spots here", mySpots)
 
     useEffect(() => {
         dispatch(fetchMySpots());
