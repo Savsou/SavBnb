@@ -24,16 +24,20 @@ const ManageSpots = () => {
         navigate('/spots/new')
     }
 
+    const handleUpdate = (spotId) => {
+        navigate(`/spots/${spotId}/edit`)
+    }
+
     return (
         <div className="spots-container">
             <h1>Manage Your Spots</h1>
             {mySpots && mySpots.length > 0 ? (
                 <div className="my-spot-list">
                     {mySpots.map(spot => (
-                        <div>
-                            <SpotTile key={spot.id} spot={spot} />
+                        <div key={spot.id}>
+                            <SpotTile spot={spot} />
                             <div className="update-delete-btn">
-                                <button>Update</button>
+                                <button onClick={() => handleUpdate(spot.id)}>Update</button>
                                 <OpenModalButton buttonText="Delete" modalComponent={<DeleteModal spotId={spot.id}/>} />
                             </div>
                         </div>

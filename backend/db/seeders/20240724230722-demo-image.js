@@ -66,7 +66,25 @@ module.exports = {
         imageableType: 'Spot',
         url: 'https://www.decorilla.com/online-decorating/wp-content/uploads/2023/08/Master-bedroom-inspiration-for-a-luxurious-interior-design.jpg',
         preview: false,
-      }
+      },
+      {
+        imageableId: 4,
+        imageableType: 'Spot',
+        url: 'https://static1.cbrimages.com/wordpress/wp-content/uploads/2023/06/king-of-the-hill-boomhauer.jpg',
+        preview: true,
+      },
+      {
+        imageableId: 4,
+        imageableType: 'Spot',
+        url: 'https://mhf-mag.com/wp-content/uploads/2021/06/Okay-Boomhauer-Logo.jpg',
+        preview: false,
+      },
+      {
+        imageableId: 4,
+        imageableType: 'Spot',
+        url: 'https://i.pinimg.com/originals/fb/40/74/fb40740c6f902df9017b5f1fcbc998c6.jpg',
+        preview: false,
+      },
     ], options);
   },
 
