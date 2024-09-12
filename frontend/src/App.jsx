@@ -3,6 +3,7 @@ import Navigation from "./components/Navigation";
 import SpotList from "./components/AllSpots";
 import SpotDetails from "./components/SpotDetails";
 import CreateSpot from "./components/CreateSpot/CreateSpot";
+import ManageSpots from "./components/ManageSpots/ManageSpots";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { restoreUser } from "./store/session";
@@ -40,7 +41,11 @@ const router = createBrowserRouter([
       {
         path: '/spots/new',
         element: <CreateSpot />
-      }
+      },
+      {
+        path: '/spots/current',
+        element: <ManageSpots />
+      },
     ]
   }
 ])

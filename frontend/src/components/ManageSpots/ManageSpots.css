@@ -1,0 +1,43 @@
+.spots-container {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+.my-spot-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+@media (max-width: 1024px) {
+    .my-spot-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .my-spot-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .my-spot-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.update-delete-btn button,
+.create-spot-button {
+    display: flex;
+    padding: 5px 20px;
+    color: white;
+    background-color: #999999;
+    box-sizing: border-box;
+    box-shadow: 2px 4px 4px black;
+}
+
+.update-delete-btn {
+    display: flex;
+    gap: 20px;
+}

@@ -203,7 +203,7 @@ const CreateSpot = () => {
 
                 <div className="spot-name-section">
                     <h2>Create a title for your spot</h2>
-                    <p>Catch guests' attention with a spot title that highlights what makes your place special.</p>
+                    <p>Catch guests&apos; attention with a spot title that highlights what makes your place special.</p>
                     <input
                     type="text"
                     placeholder="Name of your spot"

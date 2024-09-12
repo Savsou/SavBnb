@@ -4,6 +4,7 @@ import { CgProfile } from "react-icons/cg";
 import { RxHamburgerMenu } from "react-icons/rx";
 import * as sessionActions from '../../store/session';
 import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const ProfileButton = ({ user }) => {
     const dispatch = useDispatch();
@@ -59,6 +60,7 @@ const ProfileButton = ({ user }) => {
             <ul className={ulClassName} ref={ulRef}>
                 <li>Hello, {user.firstName}</li>
                 <li>{user.email}</li>
+                <NavLink to='/spots/current' className="manage-spots">Manage Spots</NavLink>
                 <li>
                     <button onClick={logout}>Log Out</button>
                 </li>
