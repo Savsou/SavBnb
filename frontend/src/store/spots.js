@@ -4,6 +4,7 @@ const SET_SPOTS = 'spots/setSpots';
 const SET_SINGLE_SPOT = 'spots/setSingleSpot';
 const CREATE_SPOT = 'spots/createSpot'
 const SET_MY_SPOTS = 'spots/setMySpots';
+const REMOVE_SPOT = 'spots/removeSpot';
 
 const setSpots = (spots) => {
     return {
@@ -23,6 +24,13 @@ const addSpot = (spot) => {
     return {
         type: CREATE_SPOT,
         payload: spot
+    }
+}
+
+const removeSpot = (spotId) =>  {
+    return {
+        type: REMOVE_SPOT,
+        spotId
     }
 }
 
@@ -46,7 +54,7 @@ export const fetchSpots = () => async dispatch => {
 export const fetchSpotById = (spotId) => async dispatch => {
     let res = await csrfFetch(`/api/spots/${spotId}`);
 
-    console.log("spots.js", res)
+    // console.log("spots.js", res)
 
     if (res.ok) {
         res = await res.json();
@@ -84,6 +92,18 @@ export const createSpot = (spotData) => async (dispatch) => {
     }
 }
 
+export const deleteSpot = (spotId) => async dispatch => {
+    let res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE',
+    });
+
+    if (res.ok) {
+        dispatch(removeSpot(res))
+        dispatch(fetchMySpots());
+    }
+
+}
+
 export const fetchMySpots = () => async (dispatch) => {
     let res = await csrfFetch('/api/spots/current');
 
@@ -106,6 +126,11 @@ const spotsReducer = (state = initialState, action) => {
         case CREATE_SPOT:
             return {
                 ...state, spots: [ ...state.spots, action.payload]
+            };
+        case REMOVE_SPOT:
+            return {
+                ...state,
+                mySpots: state.mySpots.filter(spot => spot.id !== action.spotId)
             };
         case SET_MY_SPOTS:
             return { ...state, mySpots: action.payload}

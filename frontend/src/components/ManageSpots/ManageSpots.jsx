@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import SpotTile from "../AllSpots/SpotTile";
 import './ManageSpots.css';
 import { useNavigate } from "react-router-dom";
+import OpenModalButton from "../OpenModalButton";
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 const ManageSpots = () => {
     const dispatch = useDispatch();
@@ -32,7 +34,7 @@ const ManageSpots = () => {
                             <SpotTile key={spot.id} spot={spot} />
                             <div className="update-delete-btn">
                                 <button>Update</button>
-                                <button>Delete</button>
+                                <OpenModalButton buttonText="Delete" modalComponent={<DeleteModal spotId={spot.id}/>} />
                             </div>
                         </div>
                     ))}
