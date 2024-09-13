@@ -17,3 +17,9 @@
 .review-comment {
     font-size: 16px;
 }
+
+.delete-modal-btn button {
+    background-color: #999999;
+    color: white;
+    box-shadow: 2px 3px 3px black;
+}

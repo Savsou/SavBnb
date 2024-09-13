@@ -44,10 +44,12 @@ const ReviewList = ({ reviews }) => {
                         <p className="post-date">{review.formatDate}</p>
                         <p className="review-comment">{review.review}</p>
                         {sessionUser && review.userId === sessionUser.id && (
-                            <OpenModalButton
-                                buttonText="Delete"
-                                modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spot.id} />}
-                            />
+                            <div className='delete-modal-btn'>
+                                <OpenModalButton
+                                    buttonText="Delete"
+                                    modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spot.id} />}
+                                />
+                            </div>
                         )}
 
                     </div>
