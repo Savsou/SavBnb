@@ -16,7 +16,6 @@ const SpotDetails = () => {
     // console.log("This is spot", spot);
     // console.log("This is the reviews by spot", spotReviews)
 
-    const reverseReviews = [...spotReviews].reverse();
     // console.log("this is the reverse reviews", reverseReviews)
 
     useEffect(() => {
@@ -31,8 +30,9 @@ const SpotDetails = () => {
         }
     }, [dispatch, spotId])
 
-
     if (!spot) return <p>Loading...</p>
+
+    const reverseReviews = [...spotReviews].reverse();
 
     let numReviews;
     if (!spot.numReviews || spot.numReviews === 0) {
@@ -62,7 +62,7 @@ const SpotDetails = () => {
                 </div>
                 <div className="spot-details-info">
                     <div className="info">
-                        <h2>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</h2>
+                        <h2>Hosted by {spot.Owner?.firstName} {spot.Owner?.lastName}</h2>
                         <p>{spot.description}</p>
                     </div>
                     <div className="callout-box">

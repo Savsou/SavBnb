@@ -115,17 +115,6 @@ export const updateSpot = (spotId, spotData) => async dispatch => {
     }
 };
 
-export const deleteSpot = (spotId) => async dispatch => {
-    let res = await csrfFetch(`/api/spots/${spotId}`, {
-        method: 'DELETE',
-    });
-
-    if (res.ok) {
-        dispatch(removeSpot(res))
-        dispatch(fetchMySpots());
-    }
-
-}
 
 export const fetchMySpots = () => async (dispatch) => {
     let res = await csrfFetch('/api/spots/current');
@@ -134,6 +123,18 @@ export const fetchMySpots = () => async (dispatch) => {
         res = await res.json();
         dispatch(setMySpots(res.Spots));
         return res
+    }
+
+}
+
+export const deleteSpot = (spotId) => async dispatch => {
+    let res = await csrfFetch(`/api/spots/${spotId}`, {
+        method: 'DELETE',
+    });
+
+    if (res.ok) {
+        dispatch(removeSpot(res))
+        dispatch(fetchMySpots());
     }
 
 }

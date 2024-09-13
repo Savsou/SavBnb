@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import OpenModalButton from '../OpenModalButton';
 import PostReviewModal from '../PostReviewModal';
+import DeleteReviewModal from '../DeleteReviewModal/DeleteReviewModal';
 import './ReviewList.css';
 
 const ReviewList = ({ reviews }) => {
@@ -9,6 +10,7 @@ const ReviewList = ({ reviews }) => {
 
     // console.log("Session User", sessionUser);
     // console.log("current spot", spot)
+    // console.log("Reviews here", reviews)
 
     const userReview = reviews.find(review => review.userId === sessionUser?.id);
     const postReview = sessionUser && sessionUser.id !== spot.Owner.id && !userReview;
@@ -29,7 +31,7 @@ const ReviewList = ({ reviews }) => {
             {postReview && (
                 <OpenModalButton
                     buttonText="Post Your Review"
-                    modalComponent={<PostReviewModal />}
+                    modalComponent={<PostReviewModal spotId={spot.id}/>}
                 />
             )}
 
@@ -38,9 +40,16 @@ const ReviewList = ({ reviews }) => {
             ) : (
                 formatDate.map((review, idx) => (
                     <div key={idx} className="review">
-                        <p className="review-user-name">{review.User.firstName}</p>
+                        <p className="review-user-name">{review.User?.firstName}</p>
                         <p className="post-date">{review.formatDate}</p>
                         <p className="review-comment">{review.review}</p>
+                        {sessionUser && review.userId === sessionUser.id && (
+                            <OpenModalButton
+                                buttonText="Delete"
+                                modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spot.id} />}
+                            />
+                        )}
+
                     </div>
                 ))
             )}

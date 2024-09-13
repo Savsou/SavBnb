@@ -17,8 +17,10 @@ const PostReviewModal = ({ spotId }) => {
         const reviewData = {review, stars}
         setErrors({})
 
-        return dispatch(postReview(spotId, reviewData))
-        .then(closeModal)
+        dispatch(postReview(spotId, reviewData))
+        .then(() => {
+            closeModal();
+        })
         .catch(async (res) => {
             const data = await res.json();
             if (data && data.errors) {
@@ -28,10 +30,10 @@ const PostReviewModal = ({ spotId }) => {
     }
 
     return (
-        <div>
+        <div className="modal-container">
             <h2>How was your stay?</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form onSubmit={handleSubmit} className="review-modal-container">
+                <div className="error-container">
                     {Object.values(errors).map((error, idx) => (
                         <p key={idx} className="error-msg">{error}</p>
                     ))}
@@ -39,14 +41,20 @@ const PostReviewModal = ({ spotId }) => {
                 <textarea
                     value={review}
                     onChange={(e) => setReview(e.target.value)}
-                    placeholder="Just a quick review." />
-                <input
-                type="number"
-                value={stars}
-                onChange={(e) => setStars(e.target.value)} />
+                    placeholder="Leave your review here..." />
+
+                <div className="stars-wrapper">
+                    <input
+                    type="number"
+                    min="1"
+                    max="5"
+                    value={stars}
+                    onChange={(e) => setStars(e.target.value)} />
+                    <label htmlFor="">Stars</label>
+                </div>
                 <button
                 type="submit"
-                disabled={review.length > 0 || stars < 1 || stars > 5 }
+                disabled={review.length < 10 || stars < 1 || stars > 5 }
                 >Submit Your Review</button>
             </form>
         </div>
