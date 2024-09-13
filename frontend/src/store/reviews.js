@@ -91,7 +91,7 @@ const reviewsReducer = (state = initialState, action) => {
         case SET_USER_REVIEWS:
             return { ...state, userReviews: action.payload}
         case ADD_REVIEW:
-            return { ... state, spotReviews: [action.payload, ...state.spotReviews]}
+            return { ...state, spotReviews: [action.payload, ...state.spotReviews]}
         default:
             return state;
     }
