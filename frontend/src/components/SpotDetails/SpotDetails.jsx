@@ -11,7 +11,6 @@ const SpotDetails = () => {
     const { spotId } = useParams();
     const dispatch = useDispatch();
     const spot = useSelector((state) => state.spots.spot)
-    const spotReviews = useSelector((state) => state.reviews.spotReviews)
 
     // console.log("This is spot", spot);
     // console.log("This is the reviews by spot", spotReviews)
@@ -31,8 +30,6 @@ const SpotDetails = () => {
     }, [dispatch, spotId])
 
     if (!spot) return <p>Loading...</p>
-
-    const reverseReviews = [...spotReviews].reverse();
 
     let numReviews;
     if (!spot.numReviews || spot.numReviews === 0) {
@@ -81,7 +78,7 @@ const SpotDetails = () => {
             </div>
             <div className="reviews-container">
                 <h2><LiaStarSolid /> {numReviews}</h2>
-                <ReviewList reviews={reverseReviews}/>
+                <ReviewList spotId={spotId}/>
             </div>
         </div>
     )

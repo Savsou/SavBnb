@@ -3,12 +3,12 @@ import { deleteReview } from "../../store/reviews";
 import { useModal } from "../../context/Modal";
 import './DeleteReviewModal.css'
 
-const DeleteReviewModal = ({ reviewId, spotId }) => {
+const DeleteReviewModal = ({ reviewId }) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
 
     const handleDelete = () => {
-        dispatch(deleteReview(reviewId, spotId))
+        dispatch(deleteReview(reviewId))
         closeModal();
     }
 
