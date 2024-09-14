@@ -19,6 +19,8 @@ function Layout() {
     });
   }, [dispatch])
 
+  if (!loading) return <p>Loading...</p>;
+
   return (
     <>
       <Navigation loading={loading} />
