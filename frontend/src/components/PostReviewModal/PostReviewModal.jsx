@@ -1,16 +1,26 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { postReview } from "../../store/reviews";
+import { fetchSpotById } from "../../store/spots";
+import { FaStar } from "react-icons/fa6";
 import './PostReviewModal.css';
 
 const PostReviewModal = ({ spotId }) => {
     const dispatch = useDispatch();
+    const spot = useSelector((state) => state.spots.spot)
 
     const [review, setReview] = useState('');
-    const [stars, setStars] = useState(0);
+    const [stars, setStars] = useState(null);
+    const [hover, setHover] = useState(null);
     const [errors, setErrors] = useState({})
     const { closeModal } = useModal();
+
+    useEffect(() => {
+        if (spot) {
+            dispatch(fetchSpotById(spot.id))
+        }
+    }, [dispatch, spot])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,13 +54,27 @@ const PostReviewModal = ({ spotId }) => {
                     placeholder="Leave your review here..." />
 
                 <div className="stars-wrapper">
-                    <input
-                    type="number"
-                    min="1"
-                    max="5"
-                    value={stars}
-                    onChange={(e) => setStars(e.target.value)} />
-                    <label htmlFor="">Stars</label>
+                    <div className="stars-container">
+                        {[...Array(5)].map((star, idx) => {
+                            const currentRating = idx + 1;
+
+                            return (
+                                <label key={idx}>
+                                    <input
+                                    type="radio"
+                                    value={currentRating}
+                                    onClick={(e) => setStars(Number(e.target.value))} />
+                                    <FaStar
+                                    className="star"
+                                    size={30}
+                                    color={currentRating <= (hover || stars) ? "#ffdf00" : "black"}
+                                    onMouseEnter={() => setHover(currentRating)}
+                                    onMouseLeave={() => setHover(null)}/>
+                                </label>
+                            );
+                        })}
+                    </div>
+                    <p>Stars</p>
                 </div>
                 <button
                 type="submit"

@@ -1,11 +1,20 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteReview } from "../../store/reviews";
+import { useEffect } from "react";
 import { useModal } from "../../context/Modal";
+import { fetchSpotById } from "../../store/spots";
 import './DeleteReviewModal.css'
 
 const DeleteReviewModal = ({ reviewId }) => {
     const dispatch = useDispatch();
+    const spot = useSelector((state) => state.spots.spot)
     const { closeModal } = useModal();
+
+    useEffect(() => {
+        if (spot) {
+            dispatch(fetchSpotById(spot.id))
+        }
+    }, [dispatch, spot])
 
     const handleDelete = () => {
         dispatch(deleteReview(reviewId))

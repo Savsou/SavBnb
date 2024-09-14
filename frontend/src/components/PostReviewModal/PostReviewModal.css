@@ -29,6 +29,19 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+}
+
+.stars-container {
+    display: flex;
+}
+
+input[type=radio] {
+    display: none;
+}
+
+.star {
+    cursor: pointer;
 }
 
 .review-modal-container button {
