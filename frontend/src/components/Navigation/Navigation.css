@@ -31,7 +31,7 @@
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 20px; /* Space between items */
+    gap: 20px;
 }
 
 .logo:visited {
@@ -47,10 +47,10 @@ button:hover {
     position: absolute;
     background-color: white;
     top: 70px;
-    right: 20px;
+    right: 30px;
     padding: 10px;
     border: 1px solid black;
-    box-shadow: 0 4px 8px rgb(47, 47, 47);
+    box-shadow: 0 4px 8px #2f2f2f;
     text-align: left;
     font-size: 14pt;
     width: auto;
@@ -65,6 +65,37 @@ button:hover {
 }
 
 .profile-dropdown.hidden {
+    display: none;
+}
+
+.login-dropdown {
+    position: absolute;
+    background-color: white;
+    top: 70px;
+    right: 30px;
+    padding: 5px;
+    border: 2px solid black;
+    box-shadow: 0 4px 8px #2f2f2f;
+    text-align: left;
+    font-size: 14px;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-dropdown button {
+    border: 0;
+    display: flex;
+    align-items: flex-start;
+    margin: 5px;
+    width: 110px;
+}
+
+.login-dropdown li {
+    list-style: none;
+}
+
+.login-dropdown.hidden {
     display: none;
 }
 
