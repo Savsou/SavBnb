@@ -12,12 +12,6 @@ module.exports = {
     await Review.bulkCreate([
       {
         userId: 1,
-        spotId: 1,
-        review: 'Great place, very clean and well maintained!',
-        stars: 5,
-      },
-      {
-        userId: 1,
         spotId: 2,
         review: 'Nice location but a bit noisy.',
         stars: 4,
@@ -27,12 +21,6 @@ module.exports = {
         spotId: 1,
         review: 'Good value for money.',
         stars: 4,
-      },
-      {
-        userId: 2,
-        spotId: 2,
-        review: 'Had a wonderful stay, highly recommend.',
-        stars: 5,
       },
       {
         userId: 2,
@@ -52,12 +40,6 @@ module.exports = {
         review: 'Decent place but needs some improvements.',
         stars: 3,
       },
-      {
-        userId: 3,
-        spotId: 3,
-        review: 'Great amenities and friendly staff.',
-        stars: 4,
-      }
     ], options);
   },
 
