@@ -6,6 +6,13 @@ const CREATE_SPOT = 'spots/createSpot'
 const SET_MY_SPOTS = 'spots/setMySpots';
 const REMOVE_SPOT = 'spots/removeSpot';
 const UPDATE_SPOT = 'spots/updateSpot';
+const RESET_SPOT = 'spots/resetSpot'
+
+const resetSpot = () => {
+    return {
+        type: RESET_SPOT
+    }
+}
 
 const setSpots = (spots) => {
     return {
@@ -60,6 +67,7 @@ export const fetchSpots = () => async dispatch => {
 }
 
 export const fetchSpotById = (spotId) => async dispatch => {
+    dispatch(resetSpot());
     let res = await csrfFetch(`/api/spots/${spotId}`);
 
     if (res.ok) {
@@ -145,6 +153,8 @@ const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_SPOTS:
             return { ...state, spots: action.payload }
+        case RESET_SPOT:
+            return { ...state, spot: null }
         case SET_SINGLE_SPOT:
             return { ...state, spot: action.payload }
         case CREATE_SPOT:
