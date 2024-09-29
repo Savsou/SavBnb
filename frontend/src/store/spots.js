@@ -57,6 +57,7 @@ const setMySpots = (mySpots) => {
 }
 
 export const fetchSpots = () => async dispatch => {
+    dispatch(resetSpot());
     let res = await csrfFetch('/api/spots');
 
     if (res.ok) {
