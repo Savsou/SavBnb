@@ -13,20 +13,20 @@ module.exports = {
       {
         imageableId: 1,
         imageableType: 'Spot',
-        url: 'https://www.themillsbuilding.com/userfiles/cms/building/images/1/building.jpg',
+        url: 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1736631763/savbnb/fxzharpripejq1jx42cg.jpg',
         preview: true,
       },
       {
         imageableId: 1,
         imageableType: 'Spot',
-        url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjTxmOjhiweMJQ4muDyyn-CLhk1Ec_HMIBvQ&usqp=CAU',
+        url: 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1736631949/savbnb/zrjyvzzgz6idq99myv15.jpg',
         preview: false,
       },
       {
         imageableId: 2,
         imageableType: 'Spot',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Dubai_Marina_Skyline.jpg/1200px-Dubai_Marina_Skyline.jpg',
-        preview: false,
+        url: 'https://res.cloudinary.com/dt3unm9lt/image/upload/v1736632072/savbnb/qf3lfvtrzwnsqlkvt2x4.jpg',
+        preview: true,
       },
       {
         imageableId: 3,
