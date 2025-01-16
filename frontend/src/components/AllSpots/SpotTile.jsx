@@ -3,7 +3,7 @@ import { LiaStarSolid } from "react-icons/lia";
 import './SpotTile.css'
 
 const SpotTile = ({ spot }) => {
-    const {id, name, city, state, price, avgRating, previewImage } = spot;
+    const { id, name, city, state, price, avgRating, previewImage } = spot;
     const rating = avgRating ? avgRating : 'New';
 
     const defaultImg = "https://rankenjordan.org/wp-content/themes/apexclinic/images/no-image/No-Image-Found-400x264.png"
@@ -18,7 +18,7 @@ const SpotTile = ({ spot }) => {
                 <p className="location">{city}, {state}</p>
                 <p className="rating"><LiaStarSolid /> {rating}</p>
             </div>
-            <p className="price">${price} night</p>
+            <p className="price">${price} / night</p>
         </Link>
     )
 }

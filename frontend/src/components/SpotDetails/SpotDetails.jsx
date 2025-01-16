@@ -66,7 +66,7 @@ const SpotDetails = () => {
                         <div className="callout-box-info">
                             <p className="price-info">
                                 <span className="price">${spot.price}</span>
-                                <span> night</span>
+                                <span> / night</span>
                             </p>
                             <div className="reviews">
                                 <span><LiaStarSolid /> {numReviews}</span>
@@ -78,7 +78,7 @@ const SpotDetails = () => {
             </div>
             <div className="reviews-container">
                 <h2><LiaStarSolid /> {numReviews}</h2>
-                <ReviewList spotId={spotId}/>
+                <ReviewList spotId={spotId} />
             </div>
         </div>
     )
