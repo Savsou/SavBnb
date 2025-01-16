@@ -10,6 +10,7 @@ import * as sessionActions from './store/session'
 import { ModalProvider } from './context/Modal';
 import { Modal } from './context/Modal';
 
+
 const store = configureStore();
 
 if (import.meta.env.MODE !== "production") {

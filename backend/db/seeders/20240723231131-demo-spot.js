@@ -8,73 +8,243 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-   await Spot.bulkCreate([
-    {
-      ownerId: 1,
-      address: "456 Maple Street",
-      city: "New York",
-      state: "New York",
-      country: "United States of America",
-      lat: 40.712776,
-      lng: -74.005974,
-      name: "Tech Hub",
-      description: "Innovative tech community",
-      price: 150
-    },
-    {
-      ownerId: 2,
-      address: "789 Elm Street",
-      city: "Austin",
-      state: "Texas",
-      country: "United States of America",
-      lat: 30.267153,
-      lng: -97.743057,
-      name: "Code Space",
-      description: "Collaborative coding space",
-      price: 110
-    },
-    {
-      ownerId: 3,
-      address: "321 Oak Avenue",
-      city: "Seattle",
-      state: "Washington",
-      country: "United States of America",
-      lat: 47.606209,
-      lng: -122.332071,
-      name: "Dev Corner",
-      description: "Gathering spot for developers",
-      price: 130
-    },
-    {
-      ownerId: 1,
-      address: "456 Boom Hauer",
-      city: "New Boom",
-      state: "Hauer York",
-      country: "United States of Hauer",
-      lat: 40.712776,
-      lng: -74.005974,
-      name: "Boomhauer",
-      description: "Man, I tell ya what, man, you got this dang ol' thing goin' on, man, and you know, it’s like, you got your friends, they all tell ya one thing, and then you got your dang ol' family, and they got their own ideas, and it’s like, man, you just gotta find that middle ground, you know what I’m sayin'? Dang ol' keep it simple, man, just keep it simple, that’s all I’m sayin’. You know what I’m talkin’ about? Yeah, man, you know, it’s like, you’re workin’ on this dang ol' project, and you got this big ol' plan, and then you hit a snag, you know what I’m sayin’? Dang ol' don’t get all flustered, man, you just gotta take a step back, man, look at it from a different angle, and then, dang ol' get back in there, man. Things’ll work out, man, you just gotta hang in there. Man, I tell ya, you ever had one of them days where it’s just like, everything’s just goin' all sideways, man? Dang ol’ you wake up, and it’s like, you spill your coffee, and then you get stuck in traffic, and then it’s like, dang ol’ work's a mess, man. But you know what? Sometimes you just gotta laugh it off, man, keep your chin up, and just go with the flow, man. Well, you know, man, life’s kinda like, you got your ups and your downs, and you just gotta roll with it, man. Dang ol’ things ain’t always gonna be perfect, you know what I’m sayin'? Sometimes you just gotta take what you get, and make the best out of it, man. Don’t let it get ya down, just keep on truckin’, man. Yeah, man, you got that big ol' thing you're dealin' with, and it’s like, dang ol' one step forward, two steps back, you know? Man, it’s all part of the game, you just gotta stay focused, and keep your head in the game, man. Dang ol' don’t let the little stuff get to ya, man, just keep pushin’ through.",
-      price: 120.12
-    },
-   ], options)
+  async up(queryInterface, Sequelize) {
+    await Spot.bulkCreate([
+      // User 1 Spots
+      {
+        ownerId: 1,
+        address: "456 Maple Street",
+        city: "New York",
+        state: "New York",
+        country: "United States of America",
+        lat: 40.712776,
+        lng: -74.005974,
+        name: "Tech Hub",
+        description: "Innovative tech community",
+        price: 150
+      },
+      {
+        ownerId: 1,
+        address: "100 Main Street",
+        city: "Boston",
+        state: "Massachusetts",
+        country: "United States of America",
+        lat: 42.360081,
+        lng: -71.058884,
+        name: "Innovation Alley",
+        description: "Inspiring creative ideas",
+        price: 180
+      },
+      {
+        ownerId: 1,
+        address: "88 Broadway",
+        city: "San Francisco",
+        state: "California",
+        country: "United States of America",
+        lat: 37.774929,
+        lng: -122.419418,
+        name: "Bay Area Base",
+        description: "Great views, better ideas",
+        price: 200
+      },
+      {
+        ownerId: 1,
+        address: "10 Wall Street",
+        city: "New York",
+        state: "New York",
+        country: "United States of America",
+        lat: 40.707492,
+        lng: -74.011276,
+        name: "Finance Focus",
+        description: "High-energy workspace",
+        price: 170
+      },
+      {
+        ownerId: 1,
+        address: "50 Grove Street",
+        city: "Miami",
+        state: "Florida",
+        country: "United States of America",
+        lat: 25.761681,
+        lng: -80.191788,
+        name: "Tropical Tech",
+        description: "Collaborate by the beach",
+        price: 140
+      },
+      {
+        ownerId: 1,
+        address: "77 Pine Street",
+        city: "Chicago",
+        state: "Illinois",
+        country: "United States of America",
+        lat: 41.878113,
+        lng: -87.629799,
+        name: "Midwest Minds",
+        description: "Heart of the Windy City",
+        price: 160
+      },
+
+      // User 2 Spots
+      {
+        ownerId: 2,
+        address: "789 Elm Street",
+        city: "Austin",
+        state: "Texas",
+        country: "United States of America",
+        lat: 30.267153,
+        lng: -97.743057,
+        name: "Code Space",
+        description: "Collaborative coding space",
+        price: 110
+      },
+      {
+        ownerId: 2,
+        address: "123 Pearl Street",
+        city: "Denver",
+        state: "Colorado",
+        country: "United States of America",
+        lat: 39.739236,
+        lng: -104.990251,
+        name: "Rocky Workspace",
+        description: "Views of the Rockies",
+        price: 130
+      },
+      {
+        ownerId: 2,
+        address: "65 Cedar Street",
+        city: "Phoenix",
+        state: "Arizona",
+        country: "United States of America",
+        lat: 33.448376,
+        lng: -112.074036,
+        name: "Desert Innovators",
+        description: "Work in the sun",
+        price: 120
+      },
+      {
+        ownerId: 2,
+        address: "89 Spruce Avenue",
+        city: "Portland",
+        state: "Oregon",
+        country: "United States of America",
+        lat: 45.505106,
+        lng: -122.675026,
+        name: "Rainy Retreat",
+        description: "Cozy and creative",
+        price: 115
+      },
+      {
+        ownerId: 2,
+        address: "12 Vine Street",
+        city: "Nashville",
+        state: "Tennessee",
+        country: "United States of America",
+        lat: 36.162663,
+        lng: -86.781601,
+        name: "Music Makers",
+        description: "Where creativity thrives",
+        price: 125
+      },
+      {
+        ownerId: 2,
+        address: "90 Willow Lane",
+        city: "Salt Lake City",
+        state: "Utah",
+        country: "United States of America",
+        lat: 40.760779,
+        lng: -111.891047,
+        name: "Mountain Workspace",
+        description: "Inspiration in the mountains",
+        price: 140
+      },
+
+      // User 3 Spots
+      {
+        ownerId: 3,
+        address: "321 Oak Avenue",
+        city: "Seattle",
+        state: "Washington",
+        country: "United States of America",
+        lat: 47.606209,
+        lng: -122.332071,
+        name: "Dev Corner",
+        description: "Gathering spot for developers",
+        price: 130
+      },
+      {
+        ownerId: 3,
+        address: "22 Birch Road",
+        city: "Los Angeles",
+        state: "California",
+        country: "United States of America",
+        lat: 34.052235,
+        lng: -118.243683,
+        name: "Hollywood Workspace",
+        description: "Creative vibes near Hollywood",
+        price: 200
+      },
+      {
+        ownerId: 3,
+        address: "33 Aspen Way",
+        city: "San Diego",
+        state: "California",
+        country: "United States of America",
+        lat: 32.715736,
+        lng: -117.161087,
+        name: "Pacific Work Oasis",
+        description: "Ocean views and focus",
+        price: 180
+      },
+      {
+        ownerId: 3,
+        address: "444 Redwood Drive",
+        city: "Sacramento",
+        state: "California",
+        country: "United States of America",
+        lat: 38.581573,
+        lng: -121.4944,
+        name: "Capital Creators",
+        description: "Work hard in the capital",
+        price: 140
+      },
+      {
+        ownerId: 3,
+        address: "55 Elm Boulevard",
+        city: "Las Vegas",
+        state: "Nevada",
+        country: "United States of America",
+        lat: 36.169941,
+        lng: -115.139832,
+        name: "Vegas Visionaries",
+        description: "Inspiration under the lights",
+        price: 160
+      },
+      {
+        ownerId: 3,
+        address: "66 Fir Lane",
+        city: "Orlando",
+        state: "Florida",
+        country: "United States of America",
+        lat: 28.538336,
+        lng: -81.379234,
+        name: "Theme Park Workspace",
+        description: "Focus near the fun",
+        price: 150
+      }
+    ], options);
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'Spots';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      name: { [Op.in]: ["Tech Hub", "Code Space", "Dev Corner"] }
-    })
+      name: {
+        [Op.in]: [
+          "Tech Hub", "Innovation Alley", "Bay Area Base", "Finance Focus", "Tropical Tech", "Midwest Minds",
+          "Code Space", "Rocky Workspace", "Desert Innovators", "Rainy Retreat", "Music Makers", "Mountain Workspace",
+          "Dev Corner", "Hollywood Workspace", "Pacific Work Oasis", "Capital Creators", "Vegas Visionaries", "Theme Park Workspace"
+        ]
+      }
+    });
   }
 };
