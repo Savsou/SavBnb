@@ -28,6 +28,18 @@ https://savbnb.onrender.com
 
 <img src="https://img.shields.io/badge/-Render-23c43e?logo=render&logoColor=white&logoWidth=20" alt="Render" height="25">
 
+### Connect With Me:
+
+[<img align="left" alt="savonnasou | LinkedIn" width="22px" src="./readme-logos/linkedin.png" style="margin: 5px;" />][linkedin]
+
+[linkedin]: https://www.linkedin.com/in/savannah-sou/
+
+[<img align="left" alt="savonnasou | Gmail" width="22px" src="./readme-logos/gmail.png" style="margin: 5px;" />][gmail]
+
+[gmail]: mailto:savonna.sou@gmail.com
+
+<br></br>
+
 ## Database Schema Design
 
 ![Database Schema Design](./images/SavBnb.png)
