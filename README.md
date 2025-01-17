@@ -2,9 +2,6 @@
 
 Welcome to our Savbnb, an Airbnb clone. Savbnb is a web application that brings the experience of vacation rental booking and management into a single, streamlined platform. Whether you're looking to explore beautiful properties or share your feedback about a stay, or even create a listing yourself.
 
-## Database Schema Design
-
-![Database Schema Design](./images/SavBnb.png)
 
 ## Live Link
 
@@ -30,6 +27,22 @@ https://savbnb.onrender.com
 ### Hosting:
 
 <img src="https://img.shields.io/badge/-Render-23c43e?logo=render&logoColor=white&logoWidth=20" alt="Render" height="25">
+
+## Database Schema Design
+
+![Database Schema Design](./images/SavBnb.png)
+
+## Landing Page
+
+![chrome_abFkFiBeTY](https://github.com/user-attachments/assets/4c57ee1d-60ec-458c-af6c-1482d9d162c1)
+
+## Spot Page
+
+![chrome_XwHRQGOKoT](https://github.com/user-attachments/assets/1efa47ab-4475-4e4b-bf83-6a4535f3e24b)
+
+## Create Spot
+
+![chrome_5NOMFqOFSQ](https://github.com/user-attachments/assets/30139649-36a3-4f02-bf3e-c0da425e6519)
 
 ## API Documentation
 
